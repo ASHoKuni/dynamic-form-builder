@@ -1,5 +1,6 @@
 import { useApp } from '../../context/useApp';
 import { LOCAL_DATE_TIME_RE } from '../../constants/dataGridConstants';
+import type { FocusEvent, MouseEvent } from 'react';
 import { useDataGridState } from './useDataGridState';
 import './DataGrid.css';
 
@@ -47,7 +48,7 @@ function normalizeCellValue(rawValue: unknown): string {
 
 function formatCellValue(rawValue: unknown, fieldType: string): string {
   const value = normalizeCellValue(rawValue);
-  if (!value) return '';
+  if (!value) return 'N/A';
 
   if (fieldType === 'decimal') {
     if (!/^\d+(\.\d+)?$/.test(value)) {
@@ -102,6 +103,21 @@ export default function DataGrid({ onAddRecord, onConfigureFields }: DataGridPro
       return;
     }
     handleResetRecords();
+  };
+
+  const openDatePicker = (input: HTMLInputElement) => {
+    const nextInput = input as HTMLInputElement & { showPicker?: () => void };
+    if (typeof nextInput.showPicker === 'function') {
+      nextInput.showPicker();
+    }
+  };
+
+  const handleDateFilterClick = (event: MouseEvent<HTMLInputElement>) => {
+    openDatePicker(event.currentTarget);
+  };
+
+  const handleDateFilterFocus = (event: FocusEvent<HTMLInputElement>) => {
+    openDatePicker(event.currentTarget);
   };
 
   return (
@@ -163,6 +179,8 @@ export default function DataGrid({ onAddRecord, onConfigureFields }: DataGridPro
                       type={f.type === 'datetime' ? 'date' : 'text'}
                       placeholder={f.type === 'datetime' ? '' : 'Search'}
                       value={columnFilters[f.key] || ''}
+                      onClick={f.type === 'datetime' ? handleDateFilterClick : undefined}
+                      onFocus={f.type === 'datetime' ? handleDateFilterFocus : undefined}
                       onChange={(e) =>
                         setColumnFilters((c) => ({ ...c, [f.key]: e.target.value }))
                       }

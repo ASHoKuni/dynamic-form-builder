@@ -191,6 +191,24 @@ describe('DataGrid component', () => {
     expect(screen.getByText('01/01/1993 03.11 PM')).toBeTruthy();
   });
 
+  it('shows N/A for empty or missing values in grid rows', () => {
+    renderDataGrid({
+      state: {
+        schema: [
+          { id: 'f_1', key: 'first_name', type: 'text', title: 'First Name', required: false },
+          { id: 'f_2', key: 'email', type: 'email', title: 'Email', required: false },
+        ],
+        records: [
+          { id: 'r_1', first_name: '', email: 'john@example.com' },
+          { id: 'r_2', email: '' },
+        ],
+        selectedFieldId: null,
+      },
+    });
+
+    expect(screen.getAllByText('N/A').length).toBeGreaterThanOrEqual(2);
+  });
+
   it('uses date filter input for datetime field type', () => {
     renderDataGrid({
       state: {
