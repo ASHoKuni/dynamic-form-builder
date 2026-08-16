@@ -10,6 +10,35 @@ Built for the HackerRank "Dynamic Form Builder" take-home assignment.
 
 - https://dynamic-form-builder-pi-neon.vercel.app/
 
+## GitHub Repository
+
+- https://github.com/ASHoKuni/dynamic-form-builder
+
+## Clone, Pull, and Setup on Local Machine
+
+### Clone and run for the first time
+
+```bash
+git clone https://github.com/ASHoKuni/dynamic-form-builder.git
+cd dynamic-form-builder
+npm install
+npm run dev
+```
+
+### Pull latest changes in an existing local copy
+
+```bash
+git pull origin main
+npm install
+npm run dev
+```
+
+### Verify project health locally
+
+```bash
+npm run check
+```
+
 ## Setup Instructions
 
 Requires Node.js 18+.
@@ -178,14 +207,6 @@ Legacy compatibility is preserved: existing schemas that contain
 `employee_id` are auto-migrated on load to include
 `{ autoIncrement: true, unique: true }` behavior metadata.
 
-## DataGrid UX Enhancements
-
-- Per-column filter inputs include an inline clear-filter icon (`×`) that clears only that column's filter.
-- Date-type column filters open the native date picker on click/focus for consistent interaction.
-- Empty or missing record values are rendered as `N/A` in table rows.
-- Decimal values are displayed with 2 decimal places.
-- Date/time values are displayed as `DD/MM/YYYY hh.mm AM/PM`.
-
 ## Accessibility
 
 Accessibility is implemented at a practical baseline and includes:
@@ -194,11 +215,6 @@ Accessibility is implemented at a practical baseline and includes:
 - aria-label for phone country selector
 - improved warning/error text contrast in Field Builder panels
 - keyboard-compatible modal cancel flow (Esc)
-
-Current gaps (known):
-
-- no automated axe/WCAG audit integrated into CI yet
-- no dedicated keyboard-navigation audit report in repository docs
 
 ## CI Quality Gates
 
