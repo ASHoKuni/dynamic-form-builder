@@ -10,46 +10,98 @@ Built for the HackerRank "Dynamic Form Builder" take-home assignment.
 
 - https://dynamic-form-builder-pi-neon.vercel.app/
 
+## Demo Video
+
+- https://drive.google.com/file/d/1t1RiaEfF7KyqOx0OwM99_v5UJ2PWI47i/view?usp=sharing
+
+## Screenshots
+
+### 1. Employees workspace with no fields configured
+
+![Employees workspace with no fields configured](docs/screenshots/employees-no-fields-configured.png)
+
+### 2. Empty Field Builder state
+
+![Empty Field Builder state](docs/screenshots/field-builder-empty.png)
+
+### 3. Field Builder with populated schema
+
+![Field Builder with populated schema](docs/screenshots/field-builder-populated-profile-link.png)
+
+### 4. New untitled field selected
+
+![New untitled field selected](docs/screenshots/field-builder-untitled-selected.png)
+
+### 5. Employees grid with records
+
+![Employees grid with records](docs/screenshots/employees-with-records.png)
+
+### 6. No matching records (active filters)
+
+![No matching records state](docs/screenshots/employees-no-matching-records.png)
+
 ## GitHub Repository
 
 - https://github.com/ASHoKuni/dynamic-form-builder
 
-## Clone, Pull, and Setup on Local Machine
+## Setup Instructions
 
-### Clone and run for the first time
+### Prerequisites
+
+- Node.js 18+
+- npm 9+
+
+### Option A: Run from HackerRank ZIP submission
+
+1. Download the ZIP and extract it.
+2. Open a terminal in the extracted project folder.
+3. Install dependencies and start the app:
 
 ```bash
-git clone https://github.com/ASHoKuni/dynamic-form-builder.git
-cd dynamic-form-builder
 npm install
 npm run dev
 ```
 
-### Pull latest changes in an existing local copy
+4. Open http://localhost:5173 in your browser.
+
+### Option B: Run from GitHub repository
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/ASHoKuni/dynamic-form-builder.git
+cd dynamic-form-builder
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the app locally
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:5173` in your browser.
+
+### 4. Useful commands
+
+```bash
+npm run check      # typecheck + lint + unit/component tests + build
+npm run test:e2e   # run Playwright end-to-end flow
+npm run build      # production build -> dist/
+npm run preview    # serve the production build locally
+```
+
+### Update an existing local copy
 
 ```bash
 git pull origin main
 npm install
 npm run dev
-```
-
-### Verify project health locally
-
-```bash
-npm run check
-```
-
-## Setup Instructions
-
-Requires Node.js 18+.
-
-```bash
-npm install
-npm run dev       # start the dev server (http://localhost:5173)
-npm run check     # typecheck + lint + unit/component tests + build
-npm run test:e2e  # run Playwright end-to-end flow
-npm run build     # production build -> dist/
-npm run preview   # serve the production build locally
 ```
 
 No backend or environment variables are required — the app persists data to
