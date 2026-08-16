@@ -173,20 +173,41 @@ export default function DataGrid({ onAddRecord, onConfigureFields }: DataGridPro
               </tr>
               <tr className="data-grid__filter-row">
                 <th className="col-check" />
-                {configuredSchema.map((f) => (
-                  <th key={f.id}>
-                    <input
-                      type={f.type === 'datetime' ? 'date' : 'text'}
-                      placeholder={f.type === 'datetime' ? '' : 'Search'}
-                      value={columnFilters[f.key] || ''}
-                      onClick={f.type === 'datetime' ? handleDateFilterClick : undefined}
-                      onFocus={f.type === 'datetime' ? handleDateFilterFocus : undefined}
-                      onChange={(e) =>
-                        setColumnFilters((c) => ({ ...c, [f.key]: e.target.value }))
-                      }
-                    />
-                  </th>
-                ))}
+                {configuredSchema.map((f) => {
+                  const isDateField = f.type === 'datetime';
+                  const filterValue = columnFilters[f.key] || '';
+                  const filterLabel = f.title || 'column';
+
+                  return (
+                    <th key={f.id}>
+                      <div className="data-grid__filter-control">
+                        <input
+                          type={isDateField ? 'date' : 'text'}
+                          placeholder={isDateField ? '' : 'Search'}
+                          value={filterValue}
+                          onClick={isDateField ? handleDateFilterClick : undefined}
+                          onFocus={isDateField ? handleDateFilterFocus : undefined}
+                          onChange={(e) =>
+                            setColumnFilters((c) => ({ ...c, [f.key]: e.target.value }))
+                          }
+                        />
+                        {filterValue && (
+                          <button
+                            type="button"
+                            className={`data-grid__clear-filter ${isDateField ? 'is-date' : ''}`}
+                            title={`Clear ${filterLabel} filter`}
+                            aria-label={`Clear ${filterLabel} filter`}
+                            onClick={() =>
+                              setColumnFilters((c) => ({ ...c, [f.key]: '' }))
+                            }
+                          >
+                            ×
+                          </button>
+                        )}
+                      </div>
+                    </th>
+                  );
+                })}
               </tr>
             </thead>
             <tbody>

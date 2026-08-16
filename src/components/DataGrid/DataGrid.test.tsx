@@ -70,6 +70,12 @@ describe('DataGrid component', () => {
     expect(screen.getByText('Amy')).toBeTruthy();
     expect(screen.queryByText('Zed')).toBeNull();
     expect(screen.getByText('1 Items')).toBeTruthy();
+
+    await user.click(screen.getByRole('button', { name: /Clear Email filter/i }));
+
+    expect(screen.getByText('Amy')).toBeTruthy();
+    expect(screen.getByText('Zed')).toBeTruthy();
+    expect(screen.getByText('2 Items')).toBeTruthy();
   });
 
   it('sorts records when clicking a sortable header', async () => {
