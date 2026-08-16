@@ -97,6 +97,7 @@ export default function DataGrid({ onAddRecord, onConfigureFields }: DataGridPro
     toggleSort,
     totalPages,
   } = useDataGridState({ schema: configuredSchema, records, dispatch });
+  const hasActiveFilters = Object.values(columnFilters).some((value) => value.trim() !== '');
 
   const handleResetAllRecords = () => {
     if (!window.confirm('Remove all employee records? This action cannot be undone.')) {
@@ -227,7 +228,27 @@ export default function DataGrid({ onAddRecord, onConfigureFields }: DataGridPro
               ))}
               {pageRows.length === 0 && (
                 <tr>
-                  <td className="data-grid__empty-row" colSpan={configuredSchema.length + 1}>No records found.</td>
+                  <td className="data-grid__empty-row" colSpan={configuredSchema.length + 1}>
+                    <div className="data-grid__empty-panel">
+                      <span className="data-grid__empty-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                          <circle cx="11" cy="11" r="6.5" />
+                          <line x1="16" y1="16" x2="21" y2="21" />
+                        </svg>
+                      </span>
+                      <p className="data-grid__empty-title">{hasActiveFilters ? 'No matching records' : 'No records found'}</p>
+                      <p className="data-grid__empty-subtitle">
+                        {hasActiveFilters
+                          ? 'Try clearing one or more filters to see results.'
+                          : 'Add a new record to populate this table.'}
+                      </p>
+                      {hasActiveFilters ? (
+                        <button type="button" className="btn" onClick={resetFilters}>Clear Filters</button>
+                      ) : (
+                        <button type="button" className="btn btn--primary" onClick={onAddRecord}>+ Add</button>
+                      )}
+                    </div>
+                  </td>
                 </tr>
               )}
             </tbody>
