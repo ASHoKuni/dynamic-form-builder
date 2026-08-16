@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, FocusEvent } from 'react';
 import { useApp } from '../../context/useApp';
 import { FIELD_TYPES } from '../../constants/fieldTypes';
 import { toApiKey } from '../../utils/validation';
@@ -78,8 +78,14 @@ export default function FieldProperties() {
     setDraft((current) => ({ ...current, title: event.target.value }));
   };
 
-  const handleTitleBlur = () => {
+  const handleTitleBlur = (event: FocusEvent<HTMLInputElement>) => {
     setTitleTouched(true);
+
+    const nextTarget = event.relatedTarget;
+    if (nextTarget instanceof HTMLElement && nextTarget.closest('.field-properties__actions')) {
+      return;
+    }
+
     if (titleError || !isDirty) {
       return;
     }

@@ -2,7 +2,18 @@ import { expect, test } from '@playwright/test';
 
 test.describe('record creation flow', () => {
   test.beforeEach(async ({ page }) => {
-    await page.addInitScript(() => localStorage.clear());
+    await page.addInitScript(() => {
+      localStorage.clear();
+      localStorage.setItem(
+        'dfb.schema',
+        JSON.stringify([
+          { id: 'f_1', key: 'first_name', type: 'text', title: 'First Name', required: true },
+          { id: 'f_2', key: 'last_name', type: 'text', title: 'Last Name', required: true },
+          { id: 'f_3', key: 'email', type: 'email', title: 'Email', required: true },
+        ])
+      );
+      localStorage.setItem('dfb.records', JSON.stringify([]));
+    });
   });
 
   test('creates a new employee record and shows it in grid', async ({ page }) => {
