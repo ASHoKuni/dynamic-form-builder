@@ -178,6 +178,14 @@ Legacy compatibility is preserved: existing schemas that contain
 `employee_id` are auto-migrated on load to include
 `{ autoIncrement: true, unique: true }` behavior metadata.
 
+## DataGrid UX Enhancements
+
+- Per-column filter inputs include an inline clear-filter icon (`×`) that clears only that column's filter.
+- Date-type column filters open the native date picker on click/focus for consistent interaction.
+- Empty or missing record values are rendered as `N/A` in table rows.
+- Decimal values are displayed with 2 decimal places.
+- Date/time values are displayed as `DD/MM/YYYY hh.mm AM/PM`.
+
 ## Accessibility
 
 Accessibility is implemented at a practical baseline and includes:
@@ -262,6 +270,7 @@ The e2e spec is in [`e2e/record-flow.spec.ts`](e2e/record-flow.spec.ts), and Pla
   under the new key, it is preserved.
 - "Phone" is implemented as country-code selector + number input,
   validated as international-style number with `+` country code.
+- Empty grid cell values are shown as `N/A` for readability.
 - Column sorting and pagination were implemented as they were called out
   as optional grid capabilities; sorting is single-column only.
 - Row selection + bulk delete on the grid was added as a small extra for
@@ -274,20 +283,3 @@ The e2e spec is in [`e2e/record-flow.spec.ts`](e2e/record-flow.spec.ts), and Pla
 - No external state or form libraries — state is handled with React
   Context + `useReducer`, and validation is a small hand-written module
 
-## Submission Checklist
-
-Use this checklist before sharing the assignment repository:
-
-- Run quality gate locally: `npm run check`
-- Verify dev server starts: `npm run dev`
-- Verify production build: `npm run build`
-- Confirm README includes setup, architecture, tests, and assumptions
-- Confirm architecture diagram renders correctly in markdown preview
-- Confirm CI workflow file exists and is committed: `.github/workflows/ci.yml`
-- Confirm e2e spec exists and is committed: `e2e/record-flow.spec.ts`
-
-Optional but helpful for reviewers:
-
-- Add a hosted demo URL (Vercel/Netlify)
-- Add 2-3 screenshots (Field Builder, Create Employee, Data Grid)
-- Add a short walkthrough video link (2-5 minutes)
