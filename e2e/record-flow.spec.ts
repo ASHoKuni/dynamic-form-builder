@@ -20,7 +20,7 @@ test.describe('record creation flow', () => {
     await page.goto('/');
 
     await page.getByRole('button', { name: 'Employees' }).click();
-    await page.getByRole('button', { name: '+ Add' }).click();
+    await page.locator('.data-grid__toolbar-left').getByRole('button', { name: '+ Add' }).click();
 
     await expect(page.getByRole('heading', { name: 'Create New Employee' })).toBeVisible();
 
